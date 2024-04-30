@@ -22,8 +22,13 @@ namespace Persistence.EntityTypeConfigurations
                     Name = "CZ"
                 },
                 new() {
-                    Id= 2,
+                    Id = 2,
                     Name = "SK"
+                },
+                new()
+                {
+                    Id = 3,
+                    Name = "PL"
                 }
             };
 

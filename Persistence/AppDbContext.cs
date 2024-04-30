@@ -25,6 +25,7 @@ namespace Persistence
         {
             modelBuilder.ApplyConfiguration(new CountryEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new EmployeeEntityTypeConfiguration());
+            modelBuilder.ApplyConfiguration(new JobCategoryEntityTypeConfiguration());
             modelBuilder.ApplyConfiguration(new SalaryEntityTypeConfiguration());
         }
     }
