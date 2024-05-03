@@ -3,6 +3,7 @@ using Application.Requests;
 using Application.Responses;
 using Domain.Models;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Commands
 {
@@ -22,25 +23,18 @@ namespace Application.Commands
                 Street = request.Street,
                 ZipCode = request.ZipCode,
                 City = request.City,
-                JoinedDate = request.JoinedDate
+                JoinedDate = request.JoinedDate,
+                SuperiorId = request.SuperiorId,
+                CountryId = request.CountryId
             };
 
-            if (request.SuperiorId.HasValue)
-            {
-                var superior = new Employee { Id = request.SuperiorId.Value };
-
-                model.Superior = superior;
-            }
-
-            var country = new Country { Id = request.CountryId };
-            var salary = new Salary { Amount = request.Salary, From = request.JoinedDate };
-            var jobCategories = request.JobCategoryIds
-                .Select(id => new JobCategory { Id = id})
-                .ToList();
-
-            model.Country = country;
-            model.Salaries.Add(salary);
+            var jobCategories = await dbContext.JobCategories
+                .Where(q => request.JobCategoryIds.Contains(q.Id))
+                .ToListAsync(cancellationToken);
             model.JobCategories.AddRange(jobCategories);
+
+            var salary = new Salary { Amount = request.Salary, From = request.JoinedDate };
+            model.Salaries.Add(salary);
 
             var addResult = await dbContext.Employees.AddAsync(model, cancellationToken);
 

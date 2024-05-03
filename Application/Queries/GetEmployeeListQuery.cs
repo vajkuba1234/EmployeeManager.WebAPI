@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Application.Queries
 {
-    internal class GetEmployeeListQueryHandler(IDbContext dbContext) : IRequestHandler<GetEmployeeListRequest, EmployeeListResponse>
+    internal class GetEmployeeListQuery(IDbContext dbContext) : IRequestHandler<GetEmployeeListRequest, EmployeeListResponse>
     {
         public async Task<EmployeeListResponse> Handle(GetEmployeeListRequest request, CancellationToken cancellationToken)
         {

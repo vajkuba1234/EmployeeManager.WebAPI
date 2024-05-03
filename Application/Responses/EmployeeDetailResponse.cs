@@ -1,4 +1,5 @@
-﻿using Domain.Enums;
+﻿using Application.ViewModels;
+using Domain.Enums;
 
 namespace Application.Responses
 {
@@ -17,11 +18,9 @@ namespace Application.Responses
         public DateOnly JoinedDate { get; set; }
         public DateOnly? ExitedDate { get; set; }
 
-        public int? SuperiorId { get; set; }
-        public List<int>? SubordinateIds { get; set; }
-
-        public int CountryId { get; set; }
-        public List<int> SalaryIds { get; set; } = [];
-        public List<int> JobCategoryIds { get; set; } = [];
+        public EmployeeViewModel? Superior { get; set; }
+        public List<EmployeeViewModel>? Subordinates { get; set; }
+        public CountryViewModel Country { get; set; } = null!;
+        public List<JobCategoryViewModel> JobCategories { get; set; } = [];
     }
 }

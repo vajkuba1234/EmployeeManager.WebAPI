@@ -20,7 +20,7 @@ namespace WebAPI.Controllers
         [HttpGet("{id:int}")]
         public async Task<ActionResult<EmployeeDetailResponse>> GetEmployeeById(int id, CancellationToken cancellationToken)
         {
-            var result = await mediator.Send(new GetEmployeeDetailRequest { EmployeeId = id }, cancellationToken);
+            var result = await mediator.Send(new GetEmployeeByIdRequest { Id = id }, cancellationToken);
 
             return result;
         }

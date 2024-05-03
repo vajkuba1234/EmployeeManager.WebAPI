@@ -26,7 +26,7 @@ namespace Domain.Models
 
         public int? SuperiorId { get; set; }
         public Employee Superior { get; set; } = null!;
-        public ICollection<Employee> Subordinates { get; } = [];
+        public List<Employee> Subordinates { get; } = [];
 
         public int CountryId { get; set; }
         public Country Country { get; set; } = null!;

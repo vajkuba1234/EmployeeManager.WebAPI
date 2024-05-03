@@ -50,22 +50,19 @@ namespace WebAPI
             });
 
             // Configure the HTTP request pipeline.
-            if (app.Environment.IsDevelopment())
+            app.UseSwagger(options =>
             {
-                app.UseSwagger(options =>
+                options.RouteTemplate = "api-docs/{documentName}.json";
+                options.PreSerializeFilters.Add((swagger, httpRequest) =>
                 {
-                    options.RouteTemplate = "api-docs/{documentName}.json";
-                    options.PreSerializeFilters.Add((swagger, httpRequest) =>
-                    {
-                        swagger.Servers.Clear();
-                    });
+                    swagger.Servers.Clear();
                 });
+            });
 
-                app.UseSwaggerUI(options =>
-                {
-                    options.SwaggerEndpoint("/api-docs/v1.json", "v1");
-                });
-            }
+            app.UseSwaggerUI(options =>
+            {
+                options.SwaggerEndpoint("/api-docs/v1.json", "v1");
+            });
 
             app.UseHttpsRedirection();
 

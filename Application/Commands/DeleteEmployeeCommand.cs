@@ -12,6 +12,7 @@ namespace Application.Commands
             var employeeId = request.EmployeeId;
 
             var employee = await dbContext.Employees
+                .Include(j => j.Subordinates)
                 .Where(q => q.Id == employeeId)
                 .SingleAsync(cancellationToken);
 
