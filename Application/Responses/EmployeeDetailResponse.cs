@@ -1,11 +1,9 @@
 ﻿using Domain.Enums;
-using System.ComponentModel.DataAnnotations;
 
-namespace Domain.Models
+namespace Application.Responses
 {
-    public class Employee
+    public class EmployeeDetailResponse
     {
-        [Key]
         public int Id { get; set; }
 
         public string FirstName { get; set; } = string.Empty;
@@ -13,11 +11,6 @@ namespace Domain.Models
         public string LastName { get; set; } = string.Empty;
         public Gender Gender { get; set; }
         public DateOnly BirthDate { get; set; }
-
-        public string Street { get; set; } = string.Empty;
-        public string City { get; set; } = string.Empty;
-        public string ZipCode { get; set; } = string.Empty;
-
         public string Email { get; set; } = string.Empty;
         public string Phone { get; set; } = string.Empty;
 
@@ -25,14 +18,10 @@ namespace Domain.Models
         public DateOnly? ExitedDate { get; set; }
 
         public int? SuperiorId { get; set; }
-        public Employee Superior { get; set; } = null!;
-        public ICollection<Employee> Subordinates { get; } = [];
+        public List<int>? SubordinateIds { get; set; }
 
         public int CountryId { get; set; }
-        public Country Country { get; set; } = null!;
-
-        public List<JobCategory> JobCategories { get; } = [];
-
-        public ICollection<Salary> Salaries { get; } = [];
+        public List<int> SalaryIds { get; set; } = [];
+        public List<int> JobCategoryIds { get; set; } = [];
     }
 }
